@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useStore } from '../../store/useStore';
 
 const VideoBlock = ({ block, isSelected }) => {
@@ -59,7 +59,7 @@ const VideoBlock = ({ block, isSelected }) => {
               value={embedUrl}
               onChange={handleUrlChange}
               className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+              placeholder="https://www.youtube.com/watch?v=-p9LYH86AS8"
             />
           </div>
           <div className="flex space-x-2">

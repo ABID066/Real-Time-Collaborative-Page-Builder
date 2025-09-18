@@ -22,9 +22,11 @@ const TextBlock = ({ block, isSelected }) => {
     }
   }, [isEditing]);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.stopPropagation();
     if (!isEditing) {
       setIsEditing(true);
+      useStore.getState().setSelectedBlock(block.id);
     }
   };
 
@@ -50,7 +52,11 @@ const TextBlock = ({ block, isSelected }) => {
 
   return (
     <div 
-      className={`p-4 rounded-md transition-all ${isSelected ? 'ring-2 ring-blue-500' : ''} ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
+      className={`p-3 md:p-4 rounded-md transition-colors ${
+        isSelected ? 'ring-2 ring-blue-600' : ''
+      } ${
+        isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
+      }`}
       onClick={handleClick}
     >
       {isEditing ? (
@@ -60,7 +66,11 @@ const TextBlock = ({ block, isSelected }) => {
           onChange={handleChange}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
-          className={`w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px] resize-none ${isDarkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-900 border-gray-300'}`}
+          className={`w-full p-2 rounded-md border min-h-[80px] md:min-h-[100px] text-sm md:text-base resize-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
+            isDarkMode 
+            ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+            : 'bg-white border-gray-200 text-gray-900 placeholder-gray-500'
+          }`}
           autoFocus
         />
       ) : (

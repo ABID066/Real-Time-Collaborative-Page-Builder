@@ -72,54 +72,59 @@ const BlockWrapper = ({ block, children }) => {
     <div 
       ref={setNodeRef}
       style={style}
-      className={`mb-4 ${block.width === 'half' ? 'md:w-1/2' : 'w-full'}`}
-      onClick={handleClick}
+      className={`mb-6 ${block.width === 'half' ? 'md:w-1/2' : 'w-full'}`}
+      onClick={isSelected ? undefined : handleClick}
     >
-      <div className={`border rounded-lg overflow-hidden group relative ${isSelected ? 'ring-2 ring-blue-500' : ''}`}>
-        <div className={`p-2 flex justify-between items-center ${isDarkMode ? 'bg-gray-800' : 'bg-gray-100'} opacity-0 group-hover:opacity-100 transition-opacity absolute top-0 right-0 left-0 z-10`}>
-          <div className="flex items-center">
-            <div 
-              {...attributes} 
-              {...listeners}
-              className={`cursor-grab p-1 mr-2 rounded transition-colors ${
-                isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-200'
-              }`}
-            >
-              <GripVertical size={16} className={isDarkMode ? 'text-gray-300' : 'text-gray-600'} />
-            </div>
-            <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              {block.type.charAt(0).toUpperCase() + block.type.slice(1)}
-            </div>
+      {/* Controls Bar */}
+      <div className={`mb-2 flex justify-between items-center p-2 rounded-md ${
+        isDarkMode ? 'bg-gray-800/50 hover:bg-gray-800' : 'bg-gray-50/50 hover:bg-gray-50'
+      } transition-colors group`}>
+        <div className="flex items-center gap-2">
+          <div 
+            {...attributes} 
+            {...listeners}
+            className={`cursor-grab p-1.5 rounded-md transition-colors ${
+              isDarkMode ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-200 text-gray-500'
+            }`}
+            title="Drag to reorder"
+          >
+            <GripVertical size={18} />
           </div>
-          <div className="flex items-center space-x-2">
-            <select 
-              value={block.width} 
-              onChange={(e) => handleWidthChange(e.target.value)}
-              className={`text-xs border rounded p-1 transition-colors ${
-                isDarkMode 
-                ? 'bg-gray-700 text-white border-gray-600 hover:bg-gray-600' 
-                : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
-              }`}
-            >
-              <option value="full">Full width</option>
-              <option value="half">Half width</option>
-            </select>
-            <button 
-              onClick={handleDelete}
-              className={`p-1 rounded transition-colors ${
-                isDarkMode 
-                ? 'text-red-400 hover:bg-red-900/50' 
-                : 'text-red-500 hover:bg-red-100'
-              }`}
-              aria-label="Delete block"
-            >
-              <Trash2 size={16} />
-            </button>
+          <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            {block.type.charAt(0).toUpperCase() + block.type.slice(1)}
           </div>
         </div>
-        <div>
-          {React.cloneElement(children, { isSelected })}
+        
+        <div className="flex items-center gap-3">
+          <select 
+            value={block.width} 
+            onChange={(e) => handleWidthChange(e.target.value)}
+            className={`text-xs border rounded-md py-1.5 px-2 transition-colors ${
+              isDarkMode 
+              ? 'bg-gray-700 text-white border-gray-600 hover:bg-gray-600 focus:ring-gray-500' 
+              : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 focus:ring-gray-300'
+            } focus:outline-none focus:ring-2`}
+          >
+            <option value="full">Full width</option>
+            <option value="half">Half width</option>
+          </select>
+          <button 
+            onClick={handleDelete}
+            className={`p-1.5 rounded-md transition-all ${
+              isDarkMode 
+              ? 'text-gray-400 hover:bg-red-500/20 hover:text-red-400' 
+              : 'text-gray-500 hover:bg-red-100 hover:text-red-500'
+            }`}
+            title="Delete block"
+          >
+            <Trash2 size={18} />
+          </button>
         </div>
+      </div>
+
+      {/* Block Content */}
+      <div className={`border rounded-lg overflow-hidden ${isSelected ? 'ring-2 ring-blue-600' : ''}`}>
+        {React.cloneElement(children, { isSelected })}
       </div>
     </div>
   );
