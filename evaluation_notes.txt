@@ -1,0 +1,15 @@
+# Evaluation Notes
+
+## Completed Features
+- Dynamic blocks (text, image, video, list, chart, code)
+- Inline editing
+- Drag & drop reorder and resizing
+- State management with Zustand (JSON schema)
+- Persistence with LocalStorage
+- Real-time collaboration via WebSockets / BroadcastChannel
+- Dark / Light mode
+- Undo / Redo
+- Export to HTML
+
+## Known Limitations
+- Online collaborators presence (cursor/indicator) not implemented.
