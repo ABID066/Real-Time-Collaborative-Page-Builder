@@ -9,7 +9,7 @@ const getDefaultContent = (blockType) => {
     case 'image':
       return { src: 'https://via.placeholder.com/400x200', alt: 'Placeholder image' };
     case 'video':
-      return { embedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ' };
+      return { embedUrl: 'https://www.youtube.com/watch?v=-p9LYH86AS8' };
     case 'list':
       return { items: ['Item 1', 'Item 2', 'Item 3'] };
     case 'chart':
@@ -179,26 +179,6 @@ export const useStore = create(
             }
             return state;
           });
-          
-          // Set up heartbeat to update last active timestamp
-          const heartbeat = setInterval(() => {
-            set((state) => ({
-              collaborators: state.collaborators.map(c => 
-                c.id === clientId 
-                  ? { ...c, lastActive: Date.now() } 
-                  : c
-              )
-            }));
-          }, 5000);
-
-          // Clean up inactive users
-          const cleanup = setInterval(() => {
-            set((state) => ({
-              collaborators: state.collaborators.filter(c => 
-                Date.now() - c.lastActive < 15000
-              )
-            }));
-          }, 10000);
 
           return clientId;
         } catch (error) {
@@ -364,11 +344,3 @@ export const useStore = create(
   )
 );
 
-// Helper function to generate random colors for collaborators
-function getRandomColor() {
-  const colors = [
-    '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA5A5', '#A5FFD6',
-    '#FFC145', '#FF6B8B', '#C3FF99', '#6B66FF', '#FF66D9'
-  ];
-  return colors[Math.floor(Math.random() * colors.length)];
-}

@@ -34,8 +34,8 @@ const VideoBlock = ({ block, isSelected }) => {
       }
     }
     // Convert YouTube short URLs
-    if (url.includes('youtu.be/')) {
-      const videoId = url.split('youtu.be/')[1]?.split('?')[0];
+    if (url.includes('youtube/')) {
+      const videoId = url.split('youtube/')[1]?.split('?')[0];
       if (videoId) {
         return `https://www.youtube.com/embed/${videoId}`;
       }
