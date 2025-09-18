@@ -7,7 +7,7 @@ Create, edit, reorder, resize, persist, and collaborate on dynamic content block
 ---
 
 ## Demo / Repo
-Replace `https://real-time-collaborative-page-builde.vercel.app/` with your repo URL when sharing.
+https://real-time-collaborative-page-builde.vercel.app
 
 ---
 
