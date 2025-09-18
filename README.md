@@ -1,85 +1,167 @@
-# Collaborative Page Builder
+# Real-Time Collaborative Page Builder 🚀
 
-A real-time collaborative page builder application that allows multiple users to create and edit content blocks simultaneously. Built with React, Zustand for state management, and DnD Kit for drag-and-drop functionality.
+A **real-time collaborative page builder** (Notion / Framer - style) built with React.  
+Create, edit, reorder, resize, persist, and collaborate on dynamic content blocks.
+> NOTE: _Presence cursor / online collaborator indicators were **not implemented** (limitation)._
+
+---
+
+## Demo / Repo
+Replace `https://real-time-collaborative-page-builde.vercel.app/` with your repo URL when sharing.
+
+---
 
 ## Features
 
-- **Dynamic Block Types**: Create and edit various content blocks including text, images, videos, lists, charts, and code snippets
-- **Drag and Drop**: Easily reorder blocks with intuitive drag-and-drop functionality
-- **Real-time Collaboration**: See changes from other users in real-time
-- **Undo/Redo**: Full history management with undo and redo capabilities
-- **Dark/Light Mode**: Toggle between dark and light themes
-- **Local Storage**: Automatically saves your work to browser storage
-- **Export to HTML**: Export your page as a standalone HTML file
+- **Dynamic Block Types**
+   - Text (inline editable)
+   - Image
+   - Video embed (YouTube)
+   - List / Table
+   - Chart
+   - Code Snippet (syntax highlighting)
 
-## Setup Instructions
+- **Drag & Drop Layout**
+   - Reorder blocks using drag-and-drop (DnD Kit)
+   - Resize blocks (full-width / half-width)
 
-### Prerequisites
+- **Real-Time Collaboration**
+   - Basic multi-window synchronization via WebSockets / BroadcastChannel (last-write-wins)
 
-- Node.js (v16 or higher)
-- npm or yarn
+- **State & Persistence**
+   - Global state with **Zustand**
+   - Page stored as a JSON schema and persisted to `localStorage`
+   - Reload will reconstruct the page from JSON
 
-### Installation
+- **Extras**
+   - Dark / Light mode toggle
+   - Undo / Redo history
+   - Export the page as a static HTML file
 
-1. Clone the repository
-   ```bash
-   git clone <repository-url>
-   cd collaborative-page-builder
-   ```
+---
 
-2. Install dependencies
-   ```bash
-   npm install
-   ```
-   
-   Note: If you encounter peer dependency issues with React 19, you may need to use the `--force` flag:
-   ```bash
-   npm install --force
-   ```
+## ✨ Implemented / Not Implemented
 
-3. Start the development server
-   ```bash
-   npm run dev
-   ```
+**Implemented**
+- Dynamic blocks (Text, Image, Video, List, Chart, Code)
+- Inline editing
+- Reordering & resizing
+- JSON state + persistence
+- Drag & drop (DnD Kit)
+- WebSocket / BroadcastChannel basic sync
+- Dark/Light mode, Undo/Redo, Export HTML
 
-4. Open your browser and navigate to the URL shown in the terminal (typically http://localhost:5173/)
+**Not Implemented**
+- **Show online collaborators (cursor or presence indicator)** — *This feature was not completed.*
 
-## Usage
-
-- **Adding Blocks**: Click on the block type buttons in the toolbar to add new blocks
-- **Editing Blocks**: Click on any block to edit its content
-- **Reordering Blocks**: Drag blocks using the handle on the left side to reorder them
-- **Resizing Blocks**: Use the width toggle button to switch between full and half width
-- **Deleting Blocks**: Select a block and click the delete button
-- **Collaboration**: Changes are automatically synchronized between users
-- **Dark/Light Mode**: Toggle the theme using the sun/moon icon in the header
-- **Exporting**: Click the download icon to export your page as HTML
-
-## Technologies Used
-
-- **React**: UI framework
-- **Zustand**: State management
-- **DnD Kit**: Drag-and-drop functionality
-- **Chart.js**: Chart rendering
-- **React Syntax Highlighter**: Code block syntax highlighting
-- **BroadcastChannel API**: Real-time collaboration
+---
 
 ## Project Structure
 
 ```
 src/
 ├── components/
-│   ├── blocks/         # Individual block type components
-│   ├── BlockRenderer.jsx  # Renders the appropriate block based on type
-│   ├── BlockWrapper.jsx   # Wrapper for blocks with selection and drag functionality
-│   ├── Header.jsx         # App header with controls
-│   └── PageBuilder.jsx    # Main page builder component
+│   ├── blocks/              # Individual block types (Text, Image, Video, List, Chart, Code)
+│   │   ├── ChartBlock.jsx
+│   │   ├── CodeBlock.jsx
+│   │   ├── ImageBlock.jsx
+│   │   ├── ListBlock.jsx
+│   │   ├── TextBlock.jsx
+│   │   └── VideoBlock.jsx
+│   ├── BlockRenderer.jsx    # Renders the correct block type
+│   ├── BlockWrapper.jsx     # Wrapper for drag/drop + styling
+│   ├── Header.jsx           # App header with controls
+│   └── PageBuilder.jsx      # Main builder interface
+│
+├── context/
+│   ├── PageContext.jsx      # Context for managing page state
+│   └── PageProvider.jsx     # Provider wrapper
+│
+├── hooks/
+│   ├── useDarkMode.js       # Dark/light mode hook
+│   └── usePageContext.js    # Custom hook for page context
+│
+├── reducer/
+│   └── PageReducer.jsx      # Reducer for page actions
+│
 ├── store/
-│   └── useStore.js     # Zustand store for state management
-├── App.jsx            # Main application component
-└── main.jsx           # Entry point
+│   └── useStore.js          # Zustand store for global state
+│
+├── Page.jsx   
+├── App.jsx                  # Main app entry
+└── main.jsx                 # React DOM entry
+
+```
+# ⚡ Tech Stack
+
+- **React** – Component-based UI
+- **Zustand** – Lightweight state management
+- **DnD Kit** – Drag-and-drop interaction
+- **Chart.js** – Chart visualization
+- **React Syntax Highlighter** – Code block syntax highlighting
+- **WebSockets / BroadcastChannel API** – Real-time collaboration
+- **Tailwind CSS** – Styling
+
+---
+
+# 🛠️ Setup Instructions
+
+## Prerequisites
+- Node.js (v16+)
+- npm (comes with Node.js)
+
+## Installation
+
+
+# Clone the repository
+
+```bash
+git clone https://github.com/ABID066/Real-Time-Collaborative-Page-Builder
+
+cd collaborative-page-builder
 ```
 
-## License
+# Install dependencies
+```bash
+npm install
 
-MIT
+npm run dev
+```
+## 🎮 Usage
+
+- **Add a block** → Select from toolbar
+- **Edit a block** → Click to edit inline
+- **Reorder blocks** → Drag and drop
+- **Resize blocks** → Toggle between full / half width
+- **Delete blocks** → Use delete button on selection
+- **Collaborate** → Open in multiple browser windows, edits sync instantly
+- **Dark / Light mode** → Toggle in header
+- **Export** → Download static HTML version
+
+---
+
+## ✅ Deliverables
+
+- Full source code (structured & documented)
+- Setup & usage instructions (this README)
+
+### Core Requirements Implemented
+- Dynamic blocks
+- State management (**Zustand**)
+- Drag-and-drop layout
+- Real-time WebSocket collaboration
+- Persistence (**LocalStorage**)
+
+### Bonus Features
+- Dark mode
+- Undo/Redo
+- Export HTML
+
+### Not Implemented
+- Online collaborators presence (**cursor/indicator**)
+
+
+
+
+
+
