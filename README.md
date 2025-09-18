@@ -2,7 +2,7 @@
 
 A **real-time collaborative page builder** (Notion / Framer - style) built with React.  
 Create, edit, reorder, resize, persist, and collaborate on dynamic content blocks.
-> NOTE: _Presence cursor / online collaborator indicators were **not implemented** (limitation)._
+
 
 ---
 
